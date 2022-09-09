@@ -1,0 +1,110 @@
+% TODO: figure out what this means
+\NeedsTeXFormat{LaTeX2e}
+
+% Name of the package
+\ProvidesPackage{myassignment}
+
+% Encoding for fonts. Makes this support more fonts
+\RequirePackage[T1]{fontenc}
+
+% Language support
+\RequirePackage{babel}
+
+% Makes it possible to use the comma as a decimal separator
+\RequirePackage{icomma}
+
+% Better enumerate, itemize and description environments
+\RequirePackage[shortlabels]{enumitem}
+
+% Provides the \url and \href commands
+\RequirePackage{hyperref}
+
+% Makes it possible to use colors
+\RequirePackage{xcolor}
+
+% Provides support for figure
+\RequirePackage{graphicx}
+\RequirePackage{float}
+
+% AMS packages
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+
+% Mathtools for amsmath addons
+\RequirePackage{mathtools}
+
+% Cancelling terms in equation
+\RequirePackage{cancel}
+
+% Number a specific equation in a * environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Some math specific macros
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{note}{Note}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[theorem]
+
+% Uses skips instead of indents for new paragraphs
+\RequirePackage{parskip}
+\parskip 1ex
+
+% Does not include double spaces after a period
+\frenchspacing
+
+% Defines common macros for math
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \P is already defined to pilcrow, which we don't use
+\let\P\undefined
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator*{\argmax}{\mathrm{arg}\,\mathrm{max}}
+\DeclareMathOperator*{\argmin}{\mathrm{arg}\,\mathrm{min}}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\multideg}{multideg}
+
+\DeclareMathOperator{\tr}{tr}
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Mat}{Mat}
+
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% Number equations and theorems within the section
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
