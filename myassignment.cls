@@ -54,8 +54,8 @@
 }
 
 % Makes the section never produce a number, but still increments the counter
-\let\oldsection\section
-\renewcommand\section{\addtocounter{section}{1}\oldsection*}
+\let\old@section\section
+\renewcommand\section{\addtocounter{section}{1}\old@section*}
 
 % Make the file into PDF-A
 \RequirePackage[a-1b, mathxmp]{pdfx}
