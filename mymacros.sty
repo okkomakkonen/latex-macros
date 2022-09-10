@@ -102,3 +102,11 @@
 \newcolumntype{L}{>{$}l<{$}}
 \newcolumntype{C}{>{$}c<{$}}
 \newcolumntype{R}{>{$}r<{$}}
+
+% The wide versions look a lot better from my testing
+\let\old@tilde\tilde
+\let\old@hat\hat
+\newcommand{\narrowtilde}{\old@tilde}
+\newcommand{\narrowhat}{\old@hat}
+\renewcommand{\tilde}{\widetilde}
+\renewcommand{\hat}{\widehat}
