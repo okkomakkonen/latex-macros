@@ -27,3 +27,5 @@ The `mymacros.sty` package includes some common packages and macros I use while 
 ### MyAssignment
 
 The `myassignment.cls` class provides an article-like class for writing simple homeworks. This is kept minimal and to the point. This class uses the `mymacros.sty` package.
+
+If you want to use this class in Overleaf, for example, you can copy the `myassignment.cls` and `mymacros.sty` files to the same directory as your main file.
