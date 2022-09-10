@@ -65,9 +65,10 @@
 \let\P\undefined
 \DeclareMathOperator{\P}{\mathbb{P}}
 
-\DeclareMathOperator*{\argmax}{\mathrm{arg}\,\mathrm{max}}
-\DeclareMathOperator*{\argmin}{\mathrm{arg}\,\mathrm{min}}
-\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
 
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
@@ -75,26 +76,49 @@
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\id}{id}
-\DeclareMathOperator{\multideg}{multideg}
-
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spn}{span}
 
+\DeclareMathOperator{\multideg}{multideg}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\chr}{char}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\disc}{disc}
+
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\ev}{ev}
+
+\DeclareMathOperator{\rem}{rem}
+\DeclareMathOperator{\quo}{quo}
+
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator*{\esssupp}{ess\,supp}
+\DeclareMathOperator{\res}{res}
 
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\End}{End}
-
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Ad}{Ad}
+
+\DeclareMathOperator{\Var}{Var}
 
 % The \Re and \Im are already defined, but I do not like them
 \let\Re\undefined
 \let\Im\undefined
 \DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Res}{Res}
 
 \newcommand{\dd}{\mathop{}\!\mathrm{d}}
 
@@ -110,3 +134,11 @@
 \newcommand{\narrowhat}{\old@hat}
 \renewcommand{\tilde}{\widetilde}
 \renewcommand{\hat}{\widehat}
+
+\let\divsymbol\div
+\let\div\undefined
+\DeclareMathOperator{\div}{div}
+
+% Triple vertical bars. Copied from https://tex.stackexchange.com/a/54395
+\newcommand{\lWert}{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert}
+\newcommand{\rWert}{\right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}
