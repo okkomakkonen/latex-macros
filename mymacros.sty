@@ -28,6 +28,9 @@
 % Cancelling terms in equation
 \RequirePackage{cancel}
 
+% Array package for the \newcolumntype command
+\RequirePackage{array}
+
 % Number a specific equation in a *-environment
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
@@ -94,3 +97,8 @@
 \DeclareMathOperator{\Im}{Im}
 
 \newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% Defines the columntypes L, C, R that includes the dollars
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
