@@ -1,14 +1,5 @@
-% TODO: figure out what this means
 \NeedsTeXFormat{LaTeX2e}
-
-% Name of the package
-\ProvidesPackage{myassignment}
-
-% Encoding for fonts. Makes this support more fonts
-\RequirePackage[T1]{fontenc}
-
-% Language support
-\RequirePackage{babel}
+\ProvidesPackage{mymacros}[2022/09/10 MyMacros package]
 
 % Makes it possible to use the comma as a decimal separator
 \RequirePackage{icomma}
@@ -37,11 +28,10 @@
 % Cancelling terms in equation
 \RequirePackage{cancel}
 
-% Number a specific equation in a * environment
+% Number a specific equation in a *-environment
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
-% Some math specific macros
-
+% Define the theorem environments
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -51,20 +41,14 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
-\newtheorem*{note}{Note}
 \newtheorem*{claim}{Claim}
 
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}[theorem]
+\newtheorem*{note}{Note}
 
-% Uses skips instead of indents for new paragraphs
-\RequirePackage{parskip}
-\parskip 1ex
+% Define common macros for math
 
-% Does not include double spaces after a period
-\frenchspacing
-
-% Defines common macros for math
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -104,7 +88,3 @@
 \DeclareMathOperator{\Mat}{Mat}
 
 \newcommand{\dd}{\mathop{}\!\mathrm{d}}
-
-% Number equations and theorems within the section
-\numberwithin{equation}{section}
-\numberwithin{theorem}{section}

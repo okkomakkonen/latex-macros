@@ -1,16 +1,21 @@
 % This needs the myassignment class to be in the same directory as the source file
 % or in the $TEXHOME directory
-\documentclass[a4paper, 12pt]{myassignment}
+\documentclass{myassignment}
 
-\title{Sample Assignment}
+\title{Sample Assignment 1}
 \author{Okko Makkonen\thanks{Aalto University}}
 \date{\today}
 
 \begin{document}
 
 \maketitle
+
+These are some fundamental and elementary theorems within the mathematics done in ancient Greece with proofs in modern language.
     
-\section*{Problem 1}
+\section{Problem 1}
+
+\begin{theorem}
+\end{theorem}
 
 \begin{claim}
 The square root of $2$ is irrational.
@@ -20,14 +25,14 @@ The square root of $2$ is irrational.
 Assume that there exists $a, b \in \Z$ with $\gcd(a, b) = 1$ such that $\frac{a^2}{b^2} = 2$. Then $a^2 = 2b^2$, so $a$ is even. Thus, $a = 2c$, and $2c^2 = b^2$, which means that $b$ is even. This contradicts our assumption that $\gcd(a, b) = 1$, so $\sqrt{2} \notin \Q$.
 \end{proof}
 
-\section*{Problem 2}
+\section{Problem 2}
 
 \begin{claim}
-There are infinitely many primes.
+There are infinitely many primes.\footnote{This was first shown by Euclid.}
 \end{claim}
 
 \begin{proof}
-Assume that there are finitely many primes, say $p_1, \dots, p_N$. Consider the number $q = p_1 \cdot \cdots \cdot p_N + 1$. It is clear that $p_i \nmid q$, so by the fundamental theorem of arithmetic there must be another prime factor of $q$ that is not on the list $p_1, \dots, p_N$. This contradictics our assumption of having a finite number of primes.
+Assume that there are finitely many primes, say $p_1, \dots, p_N$. Consider the number $q = p_1 \cdot \ldots \cdot p_N + 1$. It is clear that $p_i \nmid q$, so by the fundamental theorem of arithmetic there must be another prime factor of $q$ that is not on the list $p_1, \dots, p_N$. This contradictics our assumption of having a finite number of primes.
 \end{proof}
 
 
