@@ -1,11 +1,32 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{mymacros}[2022/09/10 MyMacros package]
 
+\newif\if@beamer
+\@beamerfalse
+
+\newif\if@redefine
+\@redefinetrue
+
+% If the beamer option is set, then this package can be used with beamer
+% In particular, it does not load the enumitem package, which messes up with beamer
+\DeclareOption{beamer}{\@beamertrue}
+
+% If the noredefine option is set, then this package does not redefine existing commands
+\DeclareOption{noredefine}{\@redefinefalse}
+
+% Throws a warning for unused options
+\DeclareOption*{\OptionNotUsed}
+
+\ProcessOptions
+
 % Makes it possible to use the comma as a decimal separator
 \RequirePackage{icomma}
 
 % Better enumerate, itemize and description environments
+\if@beamer
+\else
 \RequirePackage[shortlabels]{enumitem}
+\fi
 
 % Provides the \url and \href commands
 \RequirePackage{hyperref}
@@ -62,9 +83,12 @@
 \newcommand{\K}{\mathbb{K}}
 
 \DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
 % \P is already defined to pilcrow, which we don't use
+\if@redefine
 \let\P\undefined
 \DeclareMathOperator{\P}{\mathbb{P}}
+\fi
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -87,6 +111,16 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\Nm}{Nm}
+\DeclareMathOperator{\Tr}{Tr}
+
+\if@redefine
+\let\divsymbol\div
+\let\div\undefined
+\DeclareMathOperator{\div}{div}
+\else
+\newcommand{\divsymbol}{\div}
+\fi
 
 \DeclareMathOperator{\wt}{wt}
 \DeclareMathOperator{\ev}{ev}
@@ -112,16 +146,16 @@
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\Ad}{Ad}
 
-\DeclareMathOperator{\Var}{Var}
-
 % The \Re and \Im are already defined, but I do not like them
+\if@redefine
 \let\Re\undefined
 \let\Im\undefined
 \DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Im}{Im}
 \DeclareMathOperator{\Res}{Res}
+\fi
 
-\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\dd}{\,\mathrm{d}}
 
 % Defines the columntypes L, C, R that includes the dollars
 \newcolumntype{L}{>{$}l<{$}}
@@ -129,16 +163,17 @@
 \newcolumntype{R}{>{$}r<{$}}
 
 % The wide versions look a lot better from my testing
+\if@redefine
 \let\old@tilde\tilde
 \let\old@hat\hat
 \newcommand{\narrowtilde}{\old@tilde}
 \newcommand{\narrowhat}{\old@hat}
 \renewcommand{\tilde}{\widetilde}
 \renewcommand{\hat}{\widehat}
-
-\let\divsymbol\div
-\let\div\undefined
-\DeclareMathOperator{\div}{div}
+\else
+\newcommand{\narrowtilde}{\tilde}
+\newcommand{\narrowhat}{\hat}
+\fi
 
 % Triple vertical bars. Copied from https://tex.stackexchange.com/a/54395
 \newcommand{\lWert}{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert}
