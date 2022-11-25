@@ -56,6 +56,8 @@
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 % Define the theorem environments
+\if@beamer
+\else
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -70,6 +72,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}[theorem]
 \newtheorem*{note}{Note}
+\fi
 
 % Define common macros for math
 
@@ -77,8 +80,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
-\let\C\undefined
-\newcommand{\C}{\mathbb{C}}
+\let\old@C\C
+\newcommand{\C}{\ifmmode\mathbb{C}\else\old@C\fi}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\K}{\mathbb{K}}
 
