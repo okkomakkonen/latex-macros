@@ -1,15 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{mymacros}[2022/09/10 MyMacros package]
+\ProvidesPackage{mymacros}[2023/02/11 MyMacros package]
 
-\newif\if@beamer
-\@beamerfalse
+\newif\if@nobeamer
+\@nobeamertrue
 
 \newif\if@redefine
 \@redefinetrue
 
 % If the beamer option is set, then this package can be used with beamer
 % In particular, it does not load the enumitem package, which messes up with beamer
-\DeclareOption{beamer}{\@beamertrue}
+\DeclareOption{beamer}{\@nobeamerfalse}
 
 % If the noredefine option is set, then this package does not redefine existing commands
 \DeclareOption{noredefine}{\@redefinefalse}
@@ -19,12 +19,17 @@
 
 \ProcessOptions
 
+% Load packages
+% =============
+
 % Makes it possible to use the comma as a decimal separator
 \RequirePackage{icomma}
 
+% Proper spacing after text macros
+\RequirePackage{xspace}
+
 % Better enumerate, itemize and description environments
-\if@beamer
-\else
+\if@nobeamer
 \RequirePackage[shortlabels]{enumitem}
 \fi
 
@@ -46,18 +51,48 @@
 % Mathtools for amsmath addons
 \RequirePackage{mathtools}
 
+% Doublestroke font for symbols
+\RequirePackage{dsfont}
+
+\RequirePackage{mathrsfs}
+
 % Cancelling terms in equation
 \RequirePackage{cancel}
 
 % Array package for the \newcolumntype command
 \RequirePackage{array}
 
+
+% Define document commands
+% ========================
+
 % Number a specific equation in a *-environment
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
-% Define the theorem environments
-\if@beamer
-\else
+% Defines the columntypes L, C, R that includes the dollars
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{C}{>{$}c<{$}}
+\newcolumntype{R}{>{$}r<{$}}
+
+% Annotate equations
+\newcommand{\annotate}[1]{\intertext{\quad(#1)}}
+
+% Latin abbreviations
+\newcommand{\ie}{\emph{i.e.}\@\xspace}
+\newcommand{\eg}{\emph{e.g.}\@\xspace}
+\newcommand{\etal}{\emph{et~al.}\@\xspace}
+\newcommand{\etc}{\emph{etc.}\@\xspace}
+
+% If and only if arrows
+\newcommand{\BoxedRightarrow}{\raisebox{0.3ex}{\fbox{$\Rightarrow$}}\@\xspace}
+\newcommand{\BoxedLeftarrow}{\raisebox{0.3ex}{\fbox{$\Leftarrow$}}\@\xspace}
+\newcommand{\BoxedLeftrightarrow}{\raisebox{0.3ex}{\fbox{$\Leftrightarrow$}}\@\xspace}
+
+
+% Define theorem environments
+% ===============================
+
+\if@nobeamer
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -74,39 +109,39 @@
 \newtheorem*{note}{Note}
 \fi
 
-% Define common macros for math
 
+% Define common macros for math
+% =============================
+
+% Common sets
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
-\let\old@C\C
-\newcommand{\C}{\ifmmode\mathbb{C}\else\old@C\fi}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\K}{\mathbb{K}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\1}{\mathds{1}}
 
-\DeclareMathOperator{\E}{\mathbb{E}}
-\DeclareMathOperator{\Var}{Var}
-% \P is already defined to pilcrow, which we don't use
-\if@redefine
-\let\P\undefined
-\DeclareMathOperator{\P}{\mathbb{P}}
-\fi
+% Some new arrow names
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
 
+% New math operators
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\esssup}{ess\,sup}
 \DeclareMathOperator*{\essinf}{ess\,inf}
 
-\newcommand{\into}{\hookrightarrow}
-\newcommand{\onto}{\twoheadrightarrow}
-
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\ran}{ran}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\cl}{cl}
 
 \DeclareMathOperator{\multideg}{multideg}
 \DeclareMathOperator{\ord}{ord}
@@ -116,14 +151,8 @@
 \DeclareMathOperator{\disc}{disc}
 \DeclareMathOperator{\Nm}{Nm}
 \DeclareMathOperator{\Tr}{Tr}
-
-\if@redefine
-\let\divsymbol\div
-\let\div\undefined
-\DeclareMathOperator{\div}{div}
-\else
-\newcommand{\divsymbol}{\div}
-\fi
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Princ}{Princ}
 
 \DeclareMathOperator{\wt}{wt}
 \DeclareMathOperator{\ev}{ev}
@@ -140,6 +169,7 @@
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\Proj}{Proj}
 
@@ -149,35 +179,99 @@
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\Ad}{Ad}
 
-% The \Re and \Im are already defined, but I do not like them
+% Operators with specific delimiters
+\DeclarePairedDelimiterXPP\E[1]{\mathbb{E}}{[}{]}{}{#1}
+\DeclarePairedDelimiterXPP\Var[1]{\operatorname{Var}}{[}{]}{}{#1}
+
+% Differential d
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% Local L^p spaces
+\newcommand{\loc}{\mathrm{loc}}
+
+% Perp before the variable
+\newcommand{\prep}{{}^\perp}
+
+% Triple vertical bars
+% Copied from https://tex.stackexchange.com/a/54395
+\newcommand{\lWert}{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert}
+\newcommand{\rWert}{\right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}
+
+% Dashed integral sign
+% Copied from https://imathworks.com/tex/tex-latex-how-to-do-this-symbol-integral-with-a-barre-in-latex/
+\def\Xint#1{\mathchoice
+    {\XXint\displaystyle\textstyle{#1}}%
+    {\XXint\textstyle\scriptstyle{#1}}%
+    {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+    {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+      \!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
+    \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+\def\dashint{\Xint-}
+\def\ddashint{\Xint=}
+\def\dint{\dashint}
+\def\ddint{\ddashint}
+
+
+% Redefine some commands
+% ======================
+
 \if@redefine
+
+% The \Re and \Im are already defined, but I do not like them
 \let\Re\undefined
 \let\Im\undefined
 \DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Im}{Im}
-\DeclareMathOperator{\Res}{Res}
-\fi
 
-\newcommand{\dd}{\,\mathrm{d}}
+% The \div symbol is rarely used
+\let\old@div\div
+\newcommand{\divsymbol}{\old@div}
+\let\div\undefined
+\DeclareMathOperator{\div}{div}
 
-% Defines the columntypes L, C, R that includes the dollars
-\newcolumntype{L}{>{$}l<{$}}
-\newcolumntype{C}{>{$}c<{$}}
-\newcolumntype{R}{>{$}r<{$}}
+% The \C is sometimes defined
+\let\C\undefined
+\newcommand{\C}{\mathbb{C}}
+
+% The \P is already defined to be the pilcrow
+\let\old@P\P
+\newcommand{\pilcrow}{\old@P}
+\let\P\undefined
+\newcommand{\P}{\mathbb{P}}
+
+% Override \Pr
+\let\Pr\undefined
+\DeclarePairedDelimiterXPP\Pr[1]{\mathbb{P}}{[}{]}{}{#1}
 
 % The wide versions look a lot better from my testing
-\if@redefine
 \let\old@tilde\tilde
 \let\old@hat\hat
 \newcommand{\narrowtilde}{\old@tilde}
 \newcommand{\narrowhat}{\old@hat}
 \renewcommand{\tilde}{\widetilde}
 \renewcommand{\hat}{\widehat}
+
+% Use the variant version for some symbols
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+% Fix the \left and \right commands to have better spacing
+% Copied from https://tex.stackexchange.com/a/2610
+\let\old@left\left
+\let\old@right\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\old@left}
+\renewcommand{\right}{\aftergroup\egroup\old@right}
+
 \else
+
+% Provide the new commands in either case
+\newcommand{\divsymbol}{\div}
+\newcommand{\pilcrow}{\P}
 \newcommand{\narrowtilde}{\tilde}
 \newcommand{\narrowhat}{\hat}
-\fi
 
-% Triple vertical bars. Copied from https://tex.stackexchange.com/a/54395
-\newcommand{\lWert}{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert}
-\newcommand{\rWert}{\right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}
+\fi

@@ -1,6 +1,6 @@
 % This provides a custom class for assignments
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{myassignment}[2022/09/10 MyAssignment class]
+\ProvidesClass{myassignment}[2023/02/11 MyAssignment class]
 
 % We do not support the twocolumn mode
 \DeclareOption{twocolumn}{\ClassError{myassignment}{twocolumn not allowed}{Do not use the twocolumn option}}
@@ -54,8 +54,11 @@
 }
 
 % Makes the section never produce a number, but still increments the counter
+\RequirePackage{suffix}
 \let\old@section\section
-\renewcommand\section{\addtocounter{section}{1}\old@section*}
+\let\section\undefined
+\newcommand\section{\addtocounter{section}{1}\old@section*}
+\WithSuffix\newcommand\section*{\section}
 
 % Make the file into PDF-A
 \RequirePackage[a-1b, mathxmp]{pdfx}
@@ -65,6 +68,9 @@
 
 % Language support
 \RequirePackage{babel}
+
+% Microtypography
+\RequirePackage{microtype}
 
 % Load the packages and macros
 \RequirePackage{mymacros}
