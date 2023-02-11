@@ -56,8 +56,7 @@
 % Makes the section never produce a number, but still increments the counter
 \RequirePackage{suffix}
 \let\old@section\section
-\let\section\undefined
-\newcommand\section{\addtocounter{section}{1}\old@section*}
+\renewcommand\section{\addtocounter{section}{1}\old@section*}
 \WithSuffix\newcommand\section*{\section}
 
 % Make the file into PDF-A
@@ -72,16 +71,16 @@
 % Microtypography
 \RequirePackage{microtype}
 
-% Load the packages and macros
-\RequirePackage{mymacros}
-
-% Number equations within the section
-\numberwithin{equation}{section}
-\numberwithin{theorem}{section}
-
 % Uses skips instead of indents for new paragraphs
 \RequirePackage{parskip}
 \parskip 1ex
 
 % Does not include double spaces after a period
 \frenchspacing
+
+% Load the packages and macros
+\RequirePackage{mymacros}
+
+% Number equations within the section
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}

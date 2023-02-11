@@ -52,7 +52,7 @@
 
 \textbf{Common notation}
 
-Differentials can be written with \texttt{$\backslash$dd}.
+Differentials can be written with \texttt{\textbackslash dd}.
 \begin{align*}
     a\dd x + b\dd y && \int_0^\infty \frac{\sin x}{x} \dd x && \int_{\R^n} f(x) \dd \mu(x)
 \end{align*}
@@ -99,6 +99,14 @@ Additionally, \texttt{\textbackslash 1} can be used to write $\1$. The old \text
 
 The \texttt{\textbackslash prep} can be used to write the \texttt{\textbackslash perp} before the variable: $\prep V$.
 
+You can use the \texttt{dcases*} environment to write nice conditional expressions.
+\begin{align*}
+    f(x) = \begin{dcases*}
+        \frac{x}{2} & if $x$ is even \\
+        3x + 1 & if $x$ is odd
+    \end{dcases*}.
+\end{align*}
+
 \textbf{Latin abbreviations}
 
 The Latin abbreviations can be written with \texttt{\textbackslash ie}, \texttt{\textbackslash eg}, \texttt{\textbackslash etal} and \texttt{\textbackslash etc}: \ie, \eg, \etal, \etc.
@@ -143,6 +151,10 @@ The spacing of delimiters is fixed, \ie, it is safe to use \texttt{\textbackslas
 \begin{align*}
     \sin \left(\frac{1}{2}\right)
 \end{align*}
+
+The \texttt{\textbackslash setminus} and \texttt{\textbackslash smallsetminus} now looks like this: $A \setminus B$ and $A \smallsetminus B$.
+
+Instead of \texttt{\textbackslash texteuro} (\texteuro), you can use \texttt{\textbackslash euro} (\euro) or just write €.
 
 \textbf{Theorem environments}
 
