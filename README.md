@@ -35,3 +35,4 @@ If you want to use this class in Overleaf, for example, you can copy the `myassi
 - Fix `\ndiv` command, since it looks too thin.
 - Fix `\trans` command in `\scriptscriptstyle`.
 - Fix `\ProofRightarrow` and `\ProofLeftarrow`, since the arrows are not vertically centered.
+- Improve and document the `\annotate` command for annotating equations.
