@@ -51,15 +51,16 @@
 % Mathtools for amsmath addons
 \RequirePackage{mathtools}
 
-% Doublestroke font for symbols and mathscr font for math
+% Provides \mathds, \mathscr and \bm fonts for math
 \RequirePackage{dsfont}
 \RequirePackage{mathrsfs}
+\RequirePackage{bm}
 
-% Tikz is needed for setminus
+% Tikz is needed for \setminus and \smallsetminus
 \RequirePackage{tikz}
 
 % Cancelling terms in equation
-\RequirePackage{cancel}
+\RequirePackage[Smaller]{cancel}
 
 % Array package for the \newcolumntype command
 \RequirePackage{array}
@@ -83,18 +84,15 @@
 \newcommand{\annotate}[1]{\shortintertext{\qquad(#1)}}
 
 % Latin abbreviations
-\newcommand{\ie}{\emph{i.e.}\@\xspace}
+\newcommand{\cf}{\emph{cf.}\@\xspace}
 \newcommand{\eg}{\emph{e.g.}\@\xspace}
-\newcommand{\etal}{\emph{et~al.}\@\xspace}
+\newcommand{\ie}{\emph{i.e.}\@\xspace}
 \newcommand{\etc}{\emph{etc.}\@\xspace}
+\newcommand{\etal}{\emph{et~al.}\@\xspace}
 
-% If and only if arrows
-\newcommand{\BoxedRightarrow}{\raisebox{0.3ex}{\fbox{$\Rightarrow$}}\@\xspace}
-\newcommand{\BoxedLeftarrow}{\raisebox{0.3ex}{\fbox{$\Leftarrow$}}\@\xspace}
-\newcommand{\BoxedLeftrightarrow}{\raisebox{0.3ex}{\fbox{$\Leftrightarrow$}}\@\xspace}
-
-% Declare € symbol to use the superior euro symbol
-\DeclareUnicodeCharacter{20AC}{\euro}
+% Boxed if and only if arrows for proofs
+\newcommand{\ProofRightarrow}{\raisebox{0.3ex}{\fbox{$\Rightarrow$}}\@\xspace}
+\newcommand{\ProofLeftarrow}{\raisebox{0.3ex}{\fbox{$\Leftarrow$}}\@\xspace}
 
 
 % Define theorem environments
@@ -135,6 +133,12 @@
 % Some new arrow names
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
+
+% New set complement
+\newcommand{\comp}{\mathsf{c}}
+
+% New transpose
+\newcommand{\trans}{{\mkern-1.5mu\mathsf{T}}}
 
 % New math operators
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -218,6 +222,16 @@
 \def\dint{\X@int-}
 \def\ddint{\X@int=}
 
+% Define the \ndiv command from the matha font
+\DeclareFontFamily{U}{matha}{\hyphenchar\font45}
+\DeclareFontShape{U}{matha}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * matha
+      <10.95> matha10 <12> <14.4> <17.28> <20.74> <24.88> matha12
+      }{}
+\DeclareSymbolFont{matha}{U}{matha}{m}{n}
+\DeclareFontSubstitution{U}{matha}{m}{n}
+\DeclareMathSymbol{\ndiv}{\mathbin}{matha}{'037}
+
 
 % Redefine some commands
 % ======================
@@ -230,11 +244,10 @@
 \DeclareMathOperator{\Re}{Re}
 \DeclareMathOperator{\Im}{Im}
 
-% The \div symbol is rarely used
+% The \div symbol is rarely used so we use it to denote divisibility
 \let\old@div\div
 \newcommand{\divsymbol}{\old@div}
-\let\div\undefined
-\DeclareMathOperator{\div}{div}
+\renewcommand{\div}{\mid}
 
 % The \C is sometimes defined
 \providecommand{\C}{}
@@ -281,7 +294,7 @@
 
 \newcommand{\smallsetminus@D}{\raisebox{1pt}{\hbox{\tikz{\draw[line width=0.6pt,line cap=round] (2pt,0) -- (0,4pt);}}}}
 \newcommand{\smallsetminus@T}{\smallsetminus@D}
-\newcommand{\smallsetminus@S}{\raisebox{0.66pt}{\hbox{\tikz{\draw[line width=0.45pt,line cap=round] (1.33pt,0) -- (0,2.66pt);}}}}
+\newcommand{\smallsetminus@S}{\raisebox{0.67pt}{\hbox{\tikz{\draw[line width=0.45pt,line cap=round] (1.33pt,0) -- (0,2.67pt);}}}}
 \newcommand{\smallsetminus@SS}{\raisebox{0.5pt}{\hbox{\tikz{\draw[line width=0.4pt,line cap=round] (1pt,0) -- (0,2pt);}}}}
 \renewcommand{\smallsetminus}{\mathbin{\mathchoice{\smallsetminus@D}{\smallsetminus@T}{\smallsetminus@S}{\smallsetminus@SS}}}
 

@@ -71,6 +71,9 @@
 % Microtypography
 \RequirePackage{microtype}
 
+% Use the Latin Modern font
+\RequirePackage{lmodern}
+
 % Uses skips instead of indents for new paragraphs
 \RequirePackage{parskip}
 \parskip 1ex
