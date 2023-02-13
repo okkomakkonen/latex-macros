@@ -297,5 +297,10 @@
 	"Today": {
 		"prefix": "today",
 		"body": "$CURRENT_MONTH_NAME $CURRENT_DATE, $CURRENT_YEAR"
+	},
+
+	"Fraction": {
+		"prefix": "frac",
+		"body": "\\frac{$1}{$2}$0"
 	}
 }
