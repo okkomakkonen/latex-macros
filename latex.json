@@ -198,9 +198,9 @@
 	"Matrix": {
 		"prefix": "mat",
 		"body": [
-			"\\begin{${1:p}matrix}",
+			"\\begin{${1|matrix,pmatrix,bmatrix,Bmatrix,vmatrix,Vmatrix,smallmatrix,psmallmatrix,bsmallmatrix,Bsmallmatrix,vsmallmatrix,Vsmallmatrix|}}",
 			"    $0",
-			"\\end{${1:p}matrix}"
+			"\\end{${1|matrix,pmatrix,bmatrix,Bmatrix,vmatrix,Vmatrix,smallmatrix,psmallmatrix,bsmallmatrix,Bsmallmatrix,vsmallmatrix,Vsmallmatrix|}}"
 		]
 	},
 
