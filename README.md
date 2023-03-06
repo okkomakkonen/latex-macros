@@ -24,11 +24,17 @@ Alternatively, you can use these classes by including a copy of the relevant fil
 
 The `mymacros.sty` package includes some common packages and macros I use while writing mathematics. I have tried to keep it as universal as possible. See the `macros.pdf` file for examples of use.
 
+### MyArticle
+
+The `myarticle.cls` class provides an article-like class for writing simple documents. This is kept minimal and to the point. This class uses the `mymacros.sty` package.
+
 ### MyAssignment
 
-The `myassignment.cls` class provides an article-like class for writing simple homeworks. This is kept minimal and to the point. This class uses the `mymacros.sty` package. See the `assignment.pdf` file for examples of use.
+The `myassignment.cls` class extends the `myarticle.cls` class for writing simple homeworks. See the `assignment.pdf` file for examples of use.
 
-If you want to use this class in Overleaf, for example, you can copy the `myassignment.cls` and `mymacros.sty` files to the same directory as your main file.
+## Using in Overleaf
+
+If you want to use these classes in Overleaf, for example, you can copy the `myassignment.cls`, `myarticle.cls` and `mymacros.sty` files to the same directory as your main file.
 
 ## LaTeX snippets for VS Code
 
@@ -40,3 +46,6 @@ Place the file `latex.json` in `~/.config/Code/User/snippets/` or in project spe
 - Fix `\trans` command in `\scriptscriptstyle`.
 - Fix `\ProofRightarrow` and `\ProofLeftarrow`, since the arrows are not vertically centered.
 - Improve and document the `\annotate` command for annotating equations.
+- Provide a `myletter.cls` class for writing letters
+- Provide a `beamer` style
+
