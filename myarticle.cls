@@ -2,14 +2,20 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{myarticle}[2023/03/06 MyArticle class]
 
+% Define options
 \newif\if@parskip
-\@parskipfalse
+\newif\if@shorttitle
 
 % We do not support the twocolumn mode
 \DeclareOption{twocolumn}{\ClassError{myarticle}{twocolumn not allowed}{Do not use the twocolumn option}}
 
 % Use skips instead indents to separate paragraphs
+\DeclareOption{parindent}{\@parskipfalse}
 \DeclareOption{parskip}{\@parskiptrue}
+
+% Use either the short or long title
+\DeclareOption{shorttitle}{\@shorttitletrue}
+\DeclareOption{longtitle}{\@longtitlefalse}
 
 % We need to declare the default options and explicitly pass them to the article class
 \DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{article}}
@@ -19,7 +25,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
 % Default options
-\ExecuteOptions{a4paper,12pt}
+\ExecuteOptions{a4paper,12pt,shorttitle,parindent}
 \ProcessOptions\relax
 
 % Loads the class article, which this class is based on
@@ -31,7 +37,8 @@
 % Use the \ifdefvoid command
 \RequirePackage{etoolbox}
 
-% Redefine the \maketitle command to produce a small title
+% Redefine the \maketitle command
+\if@shorttitle
 \renewcommand\maketitle{%
     \begingroup
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
@@ -54,7 +61,7 @@
     \thispagestyle{plain}
     \@thanks
     \endgroup
-    \setcounter{footnote}{0}%
+    \setcounter{footnote}{0}
     \global\let\thanks\relax
     \global\let\maketitle\relax
     \global\let\@thanks\@empty
@@ -66,6 +73,7 @@
     \global\let\date\relax
     \global\let\and\relax
 }
+\fi
 
 % Make the file into PDF-A
 \RequirePackage[a-1b, mathxmp]{pdfx}
@@ -97,3 +105,8 @@
 % Number equations and theorems within the section
 \numberwithin{equation}{section}
 \numberwithin{theorem}{section}
+
+% Redefine abstract environment
+\renewenvironment{abstract}{%
+    \quotation\small{\bfseries \abstractname.}
+}{\endquotation}

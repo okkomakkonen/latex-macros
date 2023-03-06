@@ -1,23 +1,24 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{mymacros}[2023/02/11 MyMacros package]
+\ProvidesPackage{mymacros}[2023/03/06 MyMacros package]
 
 \newif\if@nobeamer
-\@nobeamertrue
-
 \newif\if@redefine
-\@redefinetrue
 
 % If the beamer option is set, then this package can be used with beamer
 % In particular, it does not load the enumitem package, which messes up with beamer
 \DeclareOption{beamer}{\@nobeamerfalse}
+\DeclareOption{nobeamer}{\@nobeamertrue}
 
 % If the noredefine option is set, then this package does not redefine existing commands
 \DeclareOption{noredefine}{\@redefinefalse}
+\DeclareOption{redefine}{\@redefinetrue}
 
 % Throws a warning for unused options
 \DeclareOption*{\OptionNotUsed}
 
-\ProcessOptions
+% Default options
+\ExecuteOptions{nobeamer,redefine}
+\ProcessOptions\relax
 
 % Load packages
 % =============
@@ -64,9 +65,6 @@
 
 % Array package for the \newcolumntype command
 \RequirePackage{array}
-
-% Provides the \euro command
-\RequirePackage{eurosym}
 
 
 % Define document commands
