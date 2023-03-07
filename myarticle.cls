@@ -48,7 +48,7 @@
         \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
     \newpage
     \global\@topnum\z@   % Prevents figures from going at top of page.
-    {\LARGE \@title} \hfill
+    \noindent{\LARGE \@title} \hfill
     \ifdefvoid{\@author}{\@date}{
         \ifdefvoid{\@date}{\@author}{
             \begin{tabular}{@{}r}
