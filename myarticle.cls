@@ -15,7 +15,7 @@
 
 % Use either the short or long title
 \DeclareOption{shorttitle}{\@shorttitletrue}
-\DeclareOption{longtitle}{\@longtitlefalse}
+\DeclareOption{longtitle}{\@shorttitlefalse}
 
 % We need to declare the default options and explicitly pass them to the article class
 \DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{article}}
