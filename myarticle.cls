@@ -37,6 +37,10 @@
 % Use the \ifdefvoid command
 \RequirePackage{etoolbox}
 
+% Check if we have both author and date in the short title
+\newif\if@authoranddate
+\@authoranddatefalse
+
 % Redefine the \maketitle command
 \if@shorttitle
 \renewcommand\maketitle{%
@@ -48,16 +52,17 @@
         \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
     \newpage
     \global\@topnum\z@   % Prevents figures from going at top of page.
-    \noindent{\LARGE \@title} \hfill
-    \ifdefvoid{\@author}{\@date}{
-        \ifdefvoid{\@date}{\@author}{
-            \begin{tabular}{@{}r}
-                \@author \\ \@date
-            \end{tabular}
+    \noindent{\LARGE\@title}\hfill%
+    \ifdefvoid{\@author}{\@date}{%
+        \ifdefvoid{\@date}{\@author}{%
+            \@authoranddatetrue
+            \begin{tabular}{@{}r@{}}
+                \@author\\\@date
+            \end{tabular}%
         }
-    }
+    }%
     \par
-    \bigskip
+    \smallskip
     \thispagestyle{plain}
     \@thanks
     \endgroup
@@ -108,5 +113,10 @@
 
 % Redefine abstract environment
 \renewenvironment{abstract}{%
-    \quotation\small{\bfseries \abstractname.}
+    \small
+    \if@authoranddate\vspace{-.8em}\fi
+    \begin{center}
+        {\bfseries\abstractname\vspace{-.5em}}
+    \end{center}
+    \quotation
 }{\endquotation}
