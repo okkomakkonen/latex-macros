@@ -48,4 +48,5 @@ Place the file `latex.json` in `~/.config/Code/User/snippets/` or in project spe
 - Improve and document the `\annotate` command for annotating equations.
 - Provide a `myletter.cls` class for writing letters
 - Provide a `beamer` style
-
+- Support other font sizes
+- Automatic longtitle if the title is too long
