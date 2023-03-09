@@ -1,31 +1,29 @@
 % This provides a custom class for articles
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{myarticle}[2023/03/06 MyArticle class]
+\ProvidesClass{myarticle}[2023/03/09 MyArticle class]
 
 % Define options
-\newif\if@parskip
+\newif\if@parindent
 \newif\if@shorttitle
 
-% We do not support the twocolumn mode
+% We do not support the twocolumn mode or the titlepage mode
 \DeclareOption{twocolumn}{\ClassError{myarticle}{twocolumn not allowed}{Do not use the twocolumn option}}
+\DeclareOption{titlepage}{\ClassError{myarticle}{titlepage not allowed}{Do not use the titlepage option}}
 
-% Use skips instead indents to separate paragraphs
-\DeclareOption{parindent}{\@parskipfalse}
-\DeclareOption{parskip}{\@parskiptrue}
+% Use either skips or indents
+\DeclareOption{parindent}{\@parindenttrue}
+\DeclareOption{parskip}{\@parindentfalse}
 
 % Use either the short or long title
 \DeclareOption{shorttitle}{\@shorttitletrue}
 \DeclareOption{longtitle}{\@shorttitlefalse}
 
-% We need to declare the default options and explicitly pass them to the article class
-\DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{article}}
-\DeclareOption{12pt}{\PassOptionsToClass{\CurrentOption}{article}}
-
 % Passes the undeclared options to the article class
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
 % Default options
-\ExecuteOptions{a4paper,12pt,shorttitle,parindent}
+\ExecuteOptions{parindent,shorttitle}
+\PassOptionsToClass{a4paper,12pt}{article}
 \ProcessOptions\relax
 
 % Loads the class article, which this class is based on
@@ -41,44 +39,46 @@
 \newif\if@authoranddate
 \@authoranddatefalse
 
-% Redefine the \maketitle command
+\newcommand{\@titlestyle}{}
+
+% Redefine the look of the title
 \if@shorttitle
-\renewcommand\maketitle{%
-    \begingroup
-    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-    \long\def\@makefntext##1{\parindent 1em\noindent
-        \hb@xt@1.8em{%
-        \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
-    \newpage
-    \global\@topnum\z@   % Prevents figures from going at top of page.
-    \noindent{\LARGE\@title}\hfill%
+\def\@maketitle{%
+    \parskip 0ex
+    \noindent{\@titlestyle\LARGE\@title}\hfill%
     \ifdefvoid{\@author}{\@date}{%
         \ifdefvoid{\@date}{\@author}{%
             \@authoranddatetrue
             \begin{tabular}{@{}r@{}}
-                \@author\\\@date
+                \@author \\ \@date
             \end{tabular}%
         }
     }%
     \par
     \smallskip
-    \thispagestyle{plain}
-    \@thanks
-    \endgroup
-    \setcounter{footnote}{0}
-    \global\let\thanks\relax
-    \global\let\maketitle\relax
-    \global\let\@thanks\@empty
-    \global\let\@author\@empty
-    \global\let\@date\@empty
-    \global\let\@title\@empty
-    \global\let\title\relax
-    \global\let\author\relax
-    \global\let\date\relax
-    \global\let\and\relax
+}
+\else
+\def\@maketitle{%
+    \parskip 0ex
+    \begin{center}
+        {\@titlestyle\LARGE\@title\par}
+        \bigskip
+        \begin{tabular}{c}
+            \@author \\ \@date
+        \end{tabular}
+    \end{center}
 }
 \fi
+
+% Redefine abstract environment
+\renewenvironment{abstract}{%
+    \small
+    \if@authoranddate\vspace{-\smallskipamount}\fi
+    \begin{center}
+        {\bfseries\abstractname\vspace{-.5em}}
+    \end{center}
+    \quotation
+}{\endquotation}
 
 % Make the file into PDF-A
 \RequirePackage[a-1b, mathxmp]{pdfx}
@@ -95,10 +95,11 @@
 % Use the Latin Modern font
 \RequirePackage{lmodern}
 
-% Uses skips instead of indents for new paragraphs
-\if@parskip
+% Uses skips or indents depending on the options
+\if@parindent
+\RequirePackage[indent=1em,skip=0ex]{parskip}
+\else
 \RequirePackage{parskip}
-\parskip 1ex
 \fi
 
 % Does not include double spaces after a period
@@ -106,17 +107,3 @@
 
 % Load the packages and macros
 \RequirePackage{mymacros}
-
-% Number equations and theorems within the section
-\numberwithin{equation}{section}
-\numberwithin{theorem}{section}
-
-% Redefine abstract environment
-\renewenvironment{abstract}{%
-    \small
-    \if@authoranddate\vspace{-.8em}\fi
-    \begin{center}
-        {\bfseries\abstractname\vspace{-.5em}}
-    \end{center}
-    \quotation
-}{\endquotation}
