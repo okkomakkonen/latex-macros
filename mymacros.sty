@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{mymacros}[2023/03/06 MyMacros package]
+\ProvidesPackage{mymacros}[2023/03/09 MyMacros package]
 
 \newif\if@nobeamer
 \newif\if@redefine
@@ -57,12 +57,6 @@
 \RequirePackage{mathrsfs}
 \RequirePackage{bm}
 
-% Tikz is needed for \setminus and \smallsetminus
-\RequirePackage{tikz}
-
-% Cancelling terms in equation
-\RequirePackage[Smaller]{cancel}
-
 % Array package for the \newcolumntype command
 \RequirePackage{array}
 
@@ -89,8 +83,8 @@
 \newcommand{\etal}{\emph{et~al.}\@\xspace}
 
 % Boxed if and only if arrows for proofs
-\newcommand{\ProofRightarrow}{\raisebox{0.3ex}{\fbox{$\Rightarrow$}}\@\xspace}
-\newcommand{\ProofLeftarrow}{\raisebox{0.3ex}{\fbox{$\Leftarrow$}}\@\xspace}
+\newcommand{\ProofRightarrow}{\raisebox{0.25ex}{\fbox{\parbox[c][1.15ex][b]{1em}{$\Rightarrow$}}}\@\xspace}
+\newcommand{\ProofLeftarrow}{\raisebox{0.25ex}{\fbox{\parbox[c][1.15ex][b]{1em}{$\Leftarrow$}}}\@\xspace}
 
 
 % Define theorem environments
@@ -236,7 +230,7 @@
 
 \if@redefine
 
-% The \Re and \Im are already defined, but I do not like them
+% The \Re and \Im are already defined, but they look bad
 \let\Re\undefined
 \let\Im\undefined
 \DeclareMathOperator{\Re}{Re}
@@ -282,18 +276,13 @@
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\old@left}
 \renewcommand{\right}{\aftergroup\egroup\old@right}
 
-% Better \setminus and \smallsetminus
+% Better \smallsetminus
 % Copied from https://tex.stackexchange.com/a/87193
-\newcommand{\setminus@D}{\hbox{\tikz{\draw[line width=0.6pt,line cap=round] (3pt,0) -- (0,6pt);}}}
-\newcommand{\setminus@T}{\setminus@D}
-\newcommand{\setminus@S}{\hbox{\tikz{\draw[line width=0.45pt,line cap=round] (2pt,0) -- (0,4pt);}}}
-\newcommand{\setminus@SS}{\hbox{\tikz{\draw[line width=0.4pt,line cap=round] (1.5pt,0) -- (0,3pt);}}}
-\renewcommand{\setminus}{\mathbin{\mathchoice{\setminus@D}{\setminus@T}{\setminus@S}{\setminus@SS}}}
-
-\newcommand{\smallsetminus@D}{\raisebox{1pt}{\hbox{\tikz{\draw[line width=0.6pt,line cap=round] (2pt,0) -- (0,4pt);}}}}
+\RequirePackage{tikz}
+\newcommand{\smallsetminus@D}{\hbox{\tikz{\draw[line width=0.45pt,line cap=round] (0,0) -- (110:1.3ex);}}}
 \newcommand{\smallsetminus@T}{\smallsetminus@D}
-\newcommand{\smallsetminus@S}{\raisebox{0.67pt}{\hbox{\tikz{\draw[line width=0.45pt,line cap=round] (1.33pt,0) -- (0,2.67pt);}}}}
-\newcommand{\smallsetminus@SS}{\raisebox{0.5pt}{\hbox{\tikz{\draw[line width=0.4pt,line cap=round] (1pt,0) -- (0,2pt);}}}}
+\newcommand{\smallsetminus@S}{\hbox{\tikz{\draw[line width=0.4pt,line cap=round] (0,0) -- (111:0.85ex);}}}
+\newcommand{\smallsetminus@SS}{\hbox{\tikz{\draw[line width=0.3pt,line cap=round] (0,0) -- (112:0.65ex);}}}
 \renewcommand{\smallsetminus}{\mathbin{\mathchoice{\smallsetminus@D}{\smallsetminus@T}{\smallsetminus@S}{\smallsetminus@SS}}}
 
 \else
