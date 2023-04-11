@@ -18,7 +18,7 @@ in your `$HOME/.profile` file.
 
 Alternatively, you can use these classes by including a copy of the relevant files in the same directory as your main document.
 
-## Provided classes and packages
+## Provided classes, packages and themes
 
 ### MyMacros
 
@@ -31,6 +31,14 @@ The `myarticle.cls` class provides an article-like class for writing simple docu
 ### MyAssignment
 
 The `myassignment.cls` class extends the `myarticle.cls` class for writing simple homeworks. See the `assignment.pdf` file for examples of use.
+
+### MyTheme
+
+The `beamerthememytheme.sty` theme provides a simple theme (`mytheme`) for `beamer` presentations. See the `presentation.pdf` file for an example presentation.
+
+### MyAaltoColors
+
+The `beamercolorthememyaaltocolors.sty` provides the official Aalto colors for use in `beamer` presentations.
 
 ## Using in Overleaf
 
